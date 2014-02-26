@@ -8,34 +8,43 @@ var Authenticator = Ember.Object.extend({
          .set("currentSession", session);
     return session;
   },
+  teardownSession: function() {
+    this.set("isSignedIn", false)
+        .set("currentSession", null);
+  },
   loadSession: function(storeOrFinder) {
     var result,
-        currentSessionPath = this.get("currentSessionPath"),
-        setupSession = this.setupSession.bind(this);
+        setup = this.setupSession.bind(this);
 
-    return new Ember.RSVP.Promise(function(resolve) {
-      return resolve($.ajax({
-        url: currentSessionPath,
-        type: "get",
-        dataType: "json"
-      }).then(setupSession));
-    });
+    return this.ajax("get", this.get("currentSessionPath"))
+               .then(setup);
   },
   signIn: function() {
-    var setupSession = this.setupSession.bind(this);
-
-    return new Ember.RSVP.Promise(function(resolve) {
-      return resolve($.ajax({
-        url: _this.get("signInPath"),
-        type: "post",
-        dataType: "json",
-        data: {
+    var setup = this.setupSession.bind(this),
+        data = {
           user: {
-            email: _this.get("email"),
-            password: _this.get("password")
+            email: this.get("email"),
+            password: this.get("password")
           }
         }
-      }).then(setupSession));
+
+    return this.ajax("post", this.get("signInPath"), data)
+               .then(setup);
+  },
+  signOut: function() {
+    var teardown = this.teardownSession.bind(this);
+
+    return this.ajax("delete", this.get("signOutPath"))
+               .then(teardown);
+  },
+  ajax: function(method, url, data) {
+    return new Ember.RSVP.Promise(function(resolve) {
+      return resolve($.ajax({
+        url: url,
+        type: method,
+        dataType: "json",
+        data: data
+      }));
     });
   }
 });
