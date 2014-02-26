@@ -12,12 +12,20 @@ var Authenticator = Ember.Object.extend({
     this.set("isSignedIn", false)
         .set("currentSession", null);
   },
-  loadSession: function(storeOrFinder) {
+  // Options: force: true|false // Requires user to have a session
+  loadSession: function(storeOrFinder, options) {
     var result,
         setup = this.setupSession.bind(this);
 
     return this.ajax("get", this.get("currentSessionPath"))
-               .then(setup);
+               .then(setup)
+               .catch(function(error) {
+                  if(!options.force) {
+                   return Ember.RSVP.resolve();
+                  } else {
+                   return error;
+                  }
+               });
   },
   signIn: function() {
     var setup = this.setupSession.bind(this),

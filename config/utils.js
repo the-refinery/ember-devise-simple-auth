@@ -8,12 +8,16 @@ function isUnhandledAction(message) {
 
 function tryAction(target, action) {
   var args = Array.prototype.slice.call(arguments, 1, arguments.length);
+  var possibleCb = args[args.length - 1];
+
   try {
     target.send.apply(target, args);
   } catch(error) {
     // Swallow 'Nothing handled action' errors
     if(!isUnhandledAction(error.message)) {
       throw error;
+    } else if(typeof possibleCb === "function") {
+      possibleCb.apply(target, args);
     }
   }
 }
