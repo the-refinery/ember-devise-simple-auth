@@ -1,9 +1,11 @@
 var defaults = {
-  signInPath: "/sign-in"
+  signInPath: "/sign-in",
+  deviseSignInPath: "/users/sign_in"
 };
 
 var getSetting = function(app, setting) {
-  return app.getWithDefault(setting, defaults[setting.replace("deviseSimpleAuth.", "")]);
+  var prefixedKey = "deviseSimpleAuth." + setting;
+  return app.getWithDefault(prefixedKey, defaults[setting]);
 };
 
 export { getSetting };
