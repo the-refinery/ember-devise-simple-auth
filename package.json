@@ -1,0 +1,17 @@
+{
+  "name": "ember-devise-simple-auth",
+  "version": "0.0.0",
+  "description": "",
+  "main": "Brocfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "broccoli": "~0.2.0",
+    "broccoli-dist-es6-module": "^0.1.5",
+    "broccoli-concat": "0.0.2",
+    "broccoli-es6-module-filter": "^0.1.6"
+  }
+}

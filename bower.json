@@ -1,0 +1,17 @@
+{
+  "name": "ember-devise-simple-auth",
+  "version": "0.0.0",
+  "authors": [
+    "Joe Fiorini <joe@joefiorini.com>"
+  ],
+  "description": "Bare bones Devise integration for Ember.js. Uses as much of the stock Devise sessions controller as possible. Make sure you install the companion gem as well.",
+  "license": "MIT",
+  "main": "index.js",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
