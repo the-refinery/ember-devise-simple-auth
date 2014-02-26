@@ -11,10 +11,14 @@ function lookupTargetRoute(transition, container) {
 Ember.Route.reopen({
   beforeModel: function(transition) {
     var targetRoute = lookupTargetRoute(transition, this.container),
-        requiresAuth = !targetRoute.skipsAuthentication;
+        requiresAuth = !targetRoute.skipsAuthentication,
+        _this = this;
 
     return this.get("authenticator")
-               .loadSession(this.get("store"), {force: requiresAuth});
+               .loadSession(this.get("store"), {force: requiresAuth})
+               .catch(function() {
+                 _this.transitionTo("session");
+               });
   },
   _actions: {
     signOut: function() {
@@ -34,7 +38,7 @@ Ember.Route.reopen({
         return true;
       }
     },
-    error: function(error) {
+    error: function(reason) {
       if(reason.status == 401 || reason.status == 403) {
         tryAction(this, "unauthorizedRequest", function() {
           this.transitionTo("session");
