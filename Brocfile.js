@@ -25,8 +25,22 @@ module.exports = function(broccoli) {
     anonymous: false
   });
 
-  return concat(new broccoli.MergedTree([amdTree, pluginTree]), {
-    inputFiles: ['**/*.js'],
-    outputFile: '/index.js'
+  var globalTree = filterES6Modules(new broccoli.MergedTree([appTree, configTree]), {
+    moduleType: 'globals',
+    global: global,
+    namespace: namespace,
+    anonymous: false
   });
+
+  globalTree = concat(globalTree, {
+    inputFiles: ['**/*.js'],
+    outputFile: '/globals/index.js'
+  });
+
+  amdTree = concat(new broccoli.MergedTree([amdTree, pluginTree]), {
+    inputFiles: ['**/*.js'],
+    outputFile: '/appkit/index.js'
+  });
+
+  return [globalTree, amdTree];
 };
