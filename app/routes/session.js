@@ -1,4 +1,5 @@
 import {tryAction} from "ember-devise-simple-auth/utils";
+
 var SessionRoute = Ember.Route.extend({
   skipsAuthentication: true,
   model: function() {
