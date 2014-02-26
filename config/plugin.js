@@ -15,6 +15,18 @@ Ember.Route.reopen({
     signOut: function() {
       this.get("authenticator").signOut();
       tryAction(this, "didSignOut");
+    },
+    willTransition: function(transition) {
+      var routeKey    = "route:" + transition.targetName,
+          targetRoute = this.container.lookup(routeKey),
+          needsAuth = !(this.get("authenticator.isSignedIn")
+                        || targetRoute.skipsAuthentication);
+
+      if(needsAuth) {
+        this.transitionTo("session");
+      } else {
+        return true;
+      }
     }
   }
 });
