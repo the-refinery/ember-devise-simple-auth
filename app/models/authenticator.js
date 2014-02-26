@@ -1,6 +1,8 @@
 var Authenticator = Ember.Object.extend({
   email: null,
   password: null,
+  currentSession: null,
+  isSignedIn: false,
   signIn: function() {
     var _this = this;
     return new Ember.RSVP.Promise(function(resolve) {
@@ -14,6 +16,10 @@ var Authenticator = Ember.Object.extend({
             password: _this.get("password")
           }
         }
+      }).then(function(session) {
+        _this.set("isSignedIn", true)
+             .set("currentSession", session);
+        return session;
       }));
     });
   }

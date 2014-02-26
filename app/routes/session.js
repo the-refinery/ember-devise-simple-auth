@@ -8,9 +8,6 @@ var SessionRoute = Ember.Route.extend({
       var route = this;
       this.get("authenticator").signIn().
         then(function(session) {
-          route.controllerFor("application").
-            set("isSignedIn", true).
-            set("currentSession", session);
           route.send("validSignIn", session);
         }).catch(function(error) {
           var controller = route.controllerFor("session");

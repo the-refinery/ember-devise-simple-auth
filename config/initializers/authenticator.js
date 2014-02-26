@@ -9,6 +9,7 @@ var initializer = {
     auth.set("signInPath", signInPath);
     container.register("devise-simple-auth:authenticator", auth, {instantiate: false});
     app.inject("route", "authenticator", "devise-simple-auth:authenticator");
+    app.inject("controller", "auth", "devise-simple-auth:authenticator");
   }
 };
 
