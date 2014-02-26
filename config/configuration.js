@@ -1,6 +1,7 @@
 var defaults = {
   signInPath: "/sign-in",
-  deviseSignInPath: "/users/sign_in"
+  deviseSignInPath: "/users/sign_in",
+  currentSessionPath: "/sessions/current"
 };
 
 var getSetting = function(app, setting) {

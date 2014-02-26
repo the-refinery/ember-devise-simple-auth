@@ -3,10 +3,29 @@ var Authenticator = Ember.Object.extend({
   password: null,
   currentSession: null,
   isSignedIn: false,
-  signIn: function() {
-    var _this = this;
+  setupSession: function(session) {
+    this.set("isSignedIn", true)
+         .set("currentSession", session);
+    return session;
+  },
+  loadSession: function(storeOrFinder) {
+    var result,
+        currentSessionPath = this.get("currentSessionPath"),
+        setupSession = this.setupSession.bind(this);
+
     return new Ember.RSVP.Promise(function(resolve) {
-      resolve($.ajax({
+      return resolve($.ajax({
+        url: currentSessionPath,
+        type: "get",
+        dataType: "json"
+      }).then(setupSession));
+    });
+  },
+  signIn: function() {
+    var setupSession = this.setupSession.bind(this);
+
+    return new Ember.RSVP.Promise(function(resolve) {
+      return resolve($.ajax({
         url: _this.get("signInPath"),
         type: "post",
         dataType: "json",
@@ -16,11 +35,7 @@ var Authenticator = Ember.Object.extend({
             password: _this.get("password")
           }
         }
-      }).then(function(session) {
-        _this.set("isSignedIn", true)
-             .set("currentSession", session);
-        return session;
-      }));
+      }).then(setupSession));
     });
   }
 });
