@@ -1,4 +1,5 @@
 import app from "app";
+import "ember-devise-simple-auth/initializers/csrf";
 import {tryAction} from "ember-devise-simple-auth/utils";
 import SessionRouteInitializer from "ember-devise-simple-auth/initializers/session-route";
 import AuthenticatorInitializer from "ember-devise-simple-auth/initializers/authenticator";
