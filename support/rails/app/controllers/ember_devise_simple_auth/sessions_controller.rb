@@ -6,6 +6,7 @@ class EmberDeviseSimpleAuth::SessionsController < Devise::SessionsController
   before_filter :authenticate_user!, only: [:show]
 
   def show
+    authenticate_user! force: true
     render json: current_user
   end
 
