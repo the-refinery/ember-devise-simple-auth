@@ -21,6 +21,15 @@
 //= require devise_simple_auth_example
 
 // for more details see: http://emberjs.com/guides/application/
-DeviseSimpleAuthExample = Ember.Application.create();
+DeviseSimpleAuthExample = Ember.Application.create({
+  deviseSimpleAuth: {
+      // Uncomment any of the lines below to see the impact
+      // of these settings on your application
+      // signInPath: '/login',
+      // deviseSignInPath: '/sessions',  // These settings require uncommenting the
+      // deviseSignOutPath: '/sessions', // routes configured in config/routes.rb
+      // currentSessionPath: '/me'       // Please enable them after uncommenting these settings
+  }
+});
 
 //= require_tree .

@@ -1,0 +1,7 @@
+{{#unless isSignedIn}}
+{{link-to "Sign In" "session"}}
+{{else}}
+<button {{action "signOut"}}>Sign Out</button>
+{{/unless}}
+
+{{outlet}}

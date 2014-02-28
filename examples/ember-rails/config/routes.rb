@@ -1,6 +1,15 @@
 DeviseSimpleAuthExample::Application.routes.draw do
   devise_scope :user do
     get "/sessions/current" => "ember_devise_simple_auth/sessions#show"
+
+    # Uncomment the below routes to test out the
+    # ember-devise-simple-auth configuration settings
+    # found in app/assets/javascripts/application.js
+    #
+    # post "/sessions" => "ember_devise_simple_auth/sessions#create"
+    # delete "/sessions" => "ember_devise_simple_auth/sessions#destroy"
+    # get "/me" => "ember_devise_simple_auth/sessions#show"
+
   end
 
   devise_for :users, controllers: { sessions: 'ember_devise_simple_auth/sessions' }
