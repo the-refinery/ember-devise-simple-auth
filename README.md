@@ -24,27 +24,11 @@ Provides the necessary Ember plumbing to integrate with an out-of-the-box Devise
 
 Currently this plugin works best with apps built with `ember-appkit-rails`. We will be adding support for any `ember-rails` apps soon, followed by full `ember-app-kit`/`ember-cli` support in the future.
 
-Install with bower, currently pointing to the Github repository:
+Install with bower:
 
-`bower install --save ember-devise-simple-auth=git://github.com/d-i/ember-devise-simple-auth.git`
+`bower install ember-devise-simple-auth`
 
-Once support for global-namespace Ember is added, we'll register this on Bower.
-
-Now in `config/application.js` add the follow:
-
-```javascript
-//... vendor requires
-//= require router
-//= require ember-devise-simple-auth/appkit
-//... the rest of your requires
-//= require_self
-
-require('ember-devise-simple-auth');
-```
-
-**NOTE:** Make sure you require the router before ember-devise-simple-auth
-
-### Rails Support
+### Gem for Rails Support
 
 To support some small customizations in `Devise::SessionsController` you need to install our gem and update your routes. Add the following to your `Gemfile`:
 
@@ -59,8 +43,31 @@ bundle install
 rails g ember_devise_simple_auth:install
 ```
 
-And you should be good to go.
+### ember-rails apps
 
+In `config/application.js` add the following:
+
+```javascript
+//... vendor requires
+//= require ember-devise-simple-auth/globals
+//... the rest of your requires
+```
+
+### ember-appkit-rails apps
+
+In `config/application.js` add the following:
+
+```javascript
+//... vendor requires
+//= require router
+//= require ember-devise-simple-auth/appkit
+//... the rest of your requires
+//= require_self
+
+require('ember-devise-simple-auth');
+```
+
+**NOTE:** Make sure you require the router before ember-devise-simple-auth
 
 ## Configuring
 
