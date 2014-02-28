@@ -14,4 +14,4 @@ puts
 puts "Now just fire up a rails server with 'rails s'"
 puts "and sign in as:"
 puts "\temail: #{user.email}"
-puts "\tpassword: #{password”}"
+puts "\tpassword: #{password}"
