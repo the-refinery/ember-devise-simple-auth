@@ -63,6 +63,9 @@ GEM
       railties (>= 3.1)
     ember-source (1.4.0)
       handlebars-source (~> 1.0)
+    ember_devise_simple_auth (0.1.0)
+      devise (>= 3.0.0)
+      rails (~> 4.0.2)
     erubis (2.7.0)
     execjs (2.0.2)
     handlebars-source (1.3.0)
@@ -141,6 +144,7 @@ DEPENDENCIES
   coffee-rails (~> 4.0.0)
   devise
   ember-rails
+  ember_devise_simple_auth
   jbuilder (~> 1.2)
   jquery-rails
   rails (= 4.0.2)

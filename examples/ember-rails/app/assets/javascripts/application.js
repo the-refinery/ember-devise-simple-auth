@@ -16,6 +16,7 @@
 //= require handlebars
 //= require ember
 //= require ember-data
+//= require ember-devise-simple-auth/globals
 //= require_self
 //= require devise_simple_auth_example
 
