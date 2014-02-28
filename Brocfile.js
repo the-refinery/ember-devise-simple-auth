@@ -11,33 +11,28 @@ module.exports = function(broccoli) {
   var appTree = broccoli.makeTree('app'),
       configTree = broccoli.makeTree('config');
 
-  var amdTree = filterES6Modules(appTree, {
+  appTree = filterES6Modules(appTree, {
     moduleType: 'amd',
     main: 'index',
     packageName: 'app',
     anonymous: false
   });
 
-  var pluginTree = filterES6Modules(configTree, {
+  configTree = filterES6Modules(configTree, {
     moduleType: 'amd',
     main: 'plugin',
     packageName: pkg.name,
     anonymous: false
   });
 
-  var globalTree = filterES6Modules(new broccoli.MergedTree([appTree, configTree]), {
-    moduleType: 'globals',
-    global: global,
-    namespace: namespace,
-    anonymous: false
-  });
+  var amdTree = new broccoli.MergedTree([appTree, configTree]);
 
-  globalTree = concat(globalTree, {
-    inputFiles: ['**/*.js'],
+  var globalTree = concat(amdTree, {
+    inputFiles: ['../../support/loader.js', '**/*.js', '../../support/exports.js'],
     outputFile: '/globals/index.js'
   });
 
-  amdTree = concat(new broccoli.MergedTree([amdTree, pluginTree]), {
+  amdTree = concat(amdTree, {
     inputFiles: ['**/*.js'],
     outputFile: '/appkit/index.js'
   });
