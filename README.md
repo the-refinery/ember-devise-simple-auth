@@ -119,7 +119,7 @@ If a user enters invalid credentials, you can handle the `invalidSignIn` action.
 ```javascript
 export default Ember.Route.extend({
   actions: {
-    validSignIn: function() {
+    invalidSignIn: function() {
       this.controllerFor("application").set("errorMessage", "Invalid credentials");
     }
   }
@@ -128,7 +128,7 @@ export default Ember.Route.extend({
 
 #### Customize Transition on Sign Out
 
-On sign on, `ember-devise-simple-auth` automatically transitions back to sign in. If you prefer it goes somehwere different, you can handle the `didSignOut` action:
+On sign out, `ember-devise-simple-auth` automatically transitions back to sign in. If you prefer it goes somehwere different, you can handle the `didSignOut` action:
 
 ```javascript
 export default Ember.Route.extend({
