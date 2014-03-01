@@ -22,13 +22,15 @@ Provides the necessary Ember plumbing to integrate with an out-of-the-box Devise
 
 ## Installing
 
-Currently this plugin works best with apps built with `ember-appkit-rails`. We will be adding support for any `ember-rails` apps soon, followed by full `ember-app-kit`/`ember-cli` support in the future.
+Currently this plugin works best with apps built with either `ember-appkit-rails` or `ember-rails`. We hope to be adding support for `ember-app-kit` in the near future.
 
-Install with bower:
+### Install client-side code with bower
 
 `bower install ember-devise-simple-auth`
 
-### Gem for Rails Support
+**Note:** Even though there is a gem associated with this plugin, you will still need to install the client-side code associated with this plugin. It is managed by the [Bower](http://www.bower.io) package manager. Here are [instructions for setting up Bower in a Rails app](http://joelencioni.com/blog/2014/01/03/integrating-bower-with-rails/). If you do not want to use Bower, then you can download an `index.js` files for either [ember-rails](https://github.com/d-i/ember-devise-simple-auth-bower/blob/master/globals/index.js) or [ember-appkit-rails](https://github.com/d-i/ember-devise-simple-auth-bower/blob/master/appkit/index.js) and place it in `vendor/assets/javascripts/ember-devise-simple-auth/index.js`.
+
+### Install gem for server-side support
 
 To support some small customizations in `Devise::SessionsController` you need to install our gem and update your routes. Add the following to your `Gemfile`:
 
