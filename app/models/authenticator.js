@@ -12,10 +12,12 @@ var Authenticator = Ember.Object.extend({
     this.set("isSignedIn", false)
         .set("currentSession", null);
   },
-  // Options: force: true|false // Requires user to have a session
+  // Options: skip: true|false // Doesn't make ajax request for session
   loadSession: function(storeOrFinder, options) {
-    if(!options.force && this.get("isSignedIn") && this.get("currentSession")) {
+    if(this.get("isSignedIn") && this.get("currentSession")) {
       return Ember.RSVP.resolve(this.get("currentSession"));
+    } else if(options.skip) {
+      return Ember.RSVP.resolve(null);
     } else {
       return this._loadSession(options);
     }

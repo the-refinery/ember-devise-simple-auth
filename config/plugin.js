@@ -11,11 +11,10 @@ function lookupTargetRoute(transition, container) {
 Ember.Route.reopen({
   beforeModel: function(transition) {
     var targetRoute = lookupTargetRoute(transition, this.container),
-        requiresAuth = !targetRoute.skipsAuthentication,
         _this = this;
 
     return this.get("authenticator")
-               .loadSession(this.get("store"), {force: requiresAuth})
+               .loadSession(this.get("store"), {skip: targetRoute.skipsAuthentication})
                .catch(function() {
                  _this.transitionTo("session");
                });

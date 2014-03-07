@@ -21,6 +21,12 @@
   a few at the moment, but we'll likely be adding more as time goes on.
 </p>
 
+{{#if isSignedIn}}
+<p>You are currently <strong>signed in</strong> as: {{currentSession.email}}</p>
+{{else}}
+<p>You are <strong>not signed in</strong>.</p>
+{{/if}}
+
 <p>
   If it appears to not be working, or if you have questions about any of this please
   <a href="https://github.com/d-i/ember-devise-simple-auth/issues/new">
