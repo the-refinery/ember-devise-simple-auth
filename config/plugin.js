@@ -51,7 +51,8 @@ Ember.Route.reopen({
 
 Ember.Controller.reopen({
   isSignedIn: Ember.computed.alias("auth.isSignedIn"),
-  currentSession: Ember.computed.alias("auth.currentSession")
+  currentSession: Ember.computed.alias("auth.currentSession"),
+  invalidCredentials: Ember.computed.alias("auth.isInvalid")
 });
 
 Ember.Application.initializer(SessionRouteInitializer);

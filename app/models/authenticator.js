@@ -3,6 +3,14 @@ var Authenticator = Ember.Object.extend({
   password: null,
   currentSession: null,
   isSignedIn: false,
+  isValid: Ember.computed.not("isInvalid"),
+  isInvalid: Ember.computed.or("emailInvalid", "passwordInvalid"),
+  emailWillChange: function() {
+    this.set("emailInvalid", false);
+  }.observesBefore("email"),
+  passwordWillChange: function() {
+    this.set("passwordInvalid", false);
+  }.observesBefore("password"),
   setupSession: function(session) {
     this.set("isSignedIn", true)
          .set("currentSession", session);
@@ -42,7 +50,7 @@ var Authenticator = Ember.Object.extend({
             email: this.get("email"),
             password: this.get("password")
           }
-        }
+        };
 
     return this.ajax("post", this.get("signInPath"), data)
                .then(setup);
