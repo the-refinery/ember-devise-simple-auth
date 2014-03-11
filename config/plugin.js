@@ -4,7 +4,7 @@ import SessionRouteInitializer from "ember-devise-simple-auth/initializers/sessi
 import AuthenticatorInitializer from "ember-devise-simple-auth/initializers/authenticator";
 
 function lookupTargetRoute(transition, container) {
-  var key = "route:" + transition.targetName
+  var key = "route:" + transition.targetName;
   return container.lookup(key);
 }
 
