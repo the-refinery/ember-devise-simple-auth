@@ -6,7 +6,7 @@ gem 'rails', '4.0.2'
 # Add ember-rails & devise
 gem 'ember-rails'
 gem 'devise'
-gem 'ember_devise_simple_auth'
+gem 'ember_devise_simple_auth', path: '../../'
 
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
