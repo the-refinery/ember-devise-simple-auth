@@ -1,4 +1,4 @@
-$:.push File.expand_path("../support/rails/lib", __FILE__).tap{|u| puts u.inspect}
+$:.push File.expand_path("../support/rails/lib", __FILE__)
 
 # Maintain your gem's version:
 require "ember_devise_simple_auth/version"
