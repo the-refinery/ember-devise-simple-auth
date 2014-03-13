@@ -14,7 +14,7 @@ Gem::Specification.new do |s|
   s.description = "This gem enhances the stock Devise::SessionsController to be slightly more ajax friendly."
 
 
-  s.files = Dir["support/rails/{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.rdoc"]
+  s.files = Dir["lib/**/*", "support/rails/{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.rdoc"]
   s.test_files = Dir["test/**/*"]
 
   s.add_dependency "devise", ">= 3.0.0"
