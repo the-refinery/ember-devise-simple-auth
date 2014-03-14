@@ -1,7 +1,7 @@
 var Authenticator = Ember.Object.extend({
   email: null,
   password: null,
-  currentSession: null,
+  currentUser: null,
   isSignedIn: false,
   isValid: Ember.computed.not("isInvalid"),
   isInvalid: Ember.computed.or("emailInvalid", "passwordInvalid"),
@@ -13,17 +13,17 @@ var Authenticator = Ember.Object.extend({
   }.observesBefore("password"),
   setupSession: function(session) {
     this.set("isSignedIn", true)
-         .set("currentSession", session);
+         .set("currentUser", session);
     return session;
   },
   teardownSession: function() {
     this.set("isSignedIn", false)
-        .set("currentSession", null);
+        .set("currentUser", null);
   },
   // Options: skip: true|false // Doesn't make ajax request for session
   loadSession: function(storeOrFinder, options) {
-    if(this.get("isSignedIn") && this.get("currentSession")) {
-      return Ember.RSVP.resolve(this.get("currentSession"));
+    if(this.get("isSignedIn") && this.get("currentUser")) {
+      return Ember.RSVP.resolve(this.get("currentUser"));
     } else if(options.skip) {
       return Ember.RSVP.resolve(null);
     } else {
