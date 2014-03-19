@@ -81,6 +81,7 @@ Configuration happens in `config/application.js` as part of the call to `create(
 window.App = require('app').default.create({
   deviseEmberAuth: {
     signInPath: "/sign-in", // the URL users will see in the browser for the sign in page
+    userModelType: "user", // **ember-data only** name of the model that represents your user; same thing you'd pass to `store.find("...")` in a route
     deviseSignInPath: "/users/sign_in", // the URL to POST to for creating a session
     deviseSignOutPath: "/users/sign_out", // the URL to DELETE to for signing out
     currentSessionPath: "/sessions/current" // the URL for getting the current signed-in state; this is currently added by the gem
@@ -154,5 +155,16 @@ export default Ember.Route.extend({
   }
 });
 ```
+
+#### Display information about currently signed-in user
+
+You can access a `currentUser` property in any template to get details about the current user. If you are using ember-data, this will deserialize the `/sessions/current` response (provided by the support gem) using a configurable model name (defaults to "user").
+
+For example, assuming you have a fullName & email property on your user model, you can say:
+
+```handlebars
+Signed in as: {{currentUser.fullName}} ({{currentUser.email}})
+```
+
 
 [&copy;2014 D-I](http://www.d-i.co)

@@ -11,7 +11,14 @@ var Authenticator = Ember.Object.extend({
   passwordWillChange: function() {
     this.set("passwordInvalid", false);
   }.observesBefore("password"),
-  setupSession: function(session) {
+  setupSession: function(store, session) {
+
+    if(store && typeof store.pushPayload === 'function') {
+      var type = this.get("userModelType");
+      store.pushPayload(type, session);
+      session = store.find(type, session[type].id);
+    }
+
     this.set("isSignedIn", true)
          .set("currentUser", session);
     return session;
@@ -20,19 +27,20 @@ var Authenticator = Ember.Object.extend({
     this.set("isSignedIn", false)
         .set("currentUser", null);
   },
+  // store: ember-data store instance; how do we handle non-ember-data?
   // Options: skip: true|false // Doesn't make ajax request for session
-  loadSession: function(storeOrFinder, options) {
+  loadSession: function(store, options) {
     if(this.get("isSignedIn") && this.get("currentUser")) {
       return Ember.RSVP.resolve(this.get("currentUser"));
     } else if(options.skip) {
       return Ember.RSVP.resolve(null);
     } else {
-      return this._loadSession(options);
+      return this._loadSession(store, options);
     }
   },
-  _loadSession: function () {
+  _loadSession: function (store) {
     var result,
-        setup = this.setupSession.bind(this),
+        setup = this.setupSession.bind(this, store),
         teardown = this.teardownSession.bind(this);
 
     return this.ajax("get", this.get("currentSessionPath"))

@@ -6,12 +6,14 @@ var initializer = {
   initialize: function(container, app) {
     var signInPath = getSetting(app, "deviseSignInPath"),
         signOutPath = getSetting(app, "deviseSignOutPath"),
+        userModelType = getSetting(app, "userModelType"),
         currentSessionPath = getSetting(app, "currentSessionPath");
 
     var auth = Authenticator.create();
 
     auth.set("signInPath", signInPath)
         .set("signOutPath", signOutPath)
+        .set("userModelType", userModelType)
         .set("currentSessionPath", currentSessionPath);
 
     container.register("devise-simple-auth:authenticator", auth, {instantiate: false});
@@ -21,4 +23,3 @@ var initializer = {
 };
 
 export default initializer;
-
