@@ -89,6 +89,10 @@ window.App = require('app').default.create({
 });
 ```
 
+## In the Wild
+
+For a real-world example of `ember-devise-simple-auth` in use, check out [facturas](https://github.com/abuiles/facturas) by @abuiles.
+
 ## Usage
 
 **NOTE:** This assumes you have configured Devise and followed the instructions above in [Installation][installation].
