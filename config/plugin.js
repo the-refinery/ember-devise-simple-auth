@@ -54,6 +54,3 @@ Ember.Controller.reopen({
   currentUser: Ember.computed.alias("auth.currentUser"),
   invalidCredentials: Ember.computed.alias("auth.isInvalid")
 });
-
-Ember.Application.initializer(SessionRouteInitializer);
-Ember.Application.initializer(AuthenticatorInitializer);
